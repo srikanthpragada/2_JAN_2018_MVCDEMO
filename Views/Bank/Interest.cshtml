@@ -1,0 +1,39 @@
+﻿@model mvcdemo.Models.InterestViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Interest</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <h2>Interest Calculation</h2>
+        <span>Deposit Amount </span>
+        <br />
+        @Html.EditorFor(model => model.Amount)
+        @Html.ValidationMessageFor(model => model.Amount, "")
+        <p></p>
+        @Html.LabelFor(model => model.Rate)
+        <br/>
+        @Html.EditorFor(model => model.Rate)
+        @Html.ValidationMessageFor(model => model.Rate)
+        <p></p>
+        <input type="submit" value="Calculate" />
+        <h4>@ViewBag.Message</h4>
+        if (Model.Interest > 0)
+        {
+            <h3>@Model.Interest</h3>
+        }
+    }
+
+</body>
+</html>
