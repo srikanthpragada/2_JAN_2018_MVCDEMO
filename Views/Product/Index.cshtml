@@ -1,31 +1,21 @@
-﻿@model mvcdemo.Models.Product 
+﻿@model mvcdemo.Models.Product
 
 @{
-    Layout = null;
+    ViewBag.Title = "Product Information";
+    Layout = "~/Views/Shared/_DemoLayout.cshtml";
 }
+<h1>Product Information</h1>
+<h2>@Model.Name</h2>
+<h3>@Model.Price.ToString("c")</h3>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Product Info</title>
-</head>
-<body>
-    <h1>Product Information</h1>
-    <h2>@Model.Name</h2>
-    <h3>@Model.Price.ToString("c")</h3>
-
-    <h4>Features</h4>
-    <ul>
-        @foreach(var f in Model.Features)
+<h4>Features</h4>
+<ul>
+    @foreach (var f in Model.Features)
+    {
+        if (f != null && f.Length > 0)
         {
-            if (f != null && f.Length > 0)
-            {
-                  <li>@f</li>
-            }
+            <li>@f</li>
         }
-    </ul>
+    }
+</ul>
 
-</body>
-</html>

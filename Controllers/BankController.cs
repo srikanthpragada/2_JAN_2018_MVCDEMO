@@ -9,7 +9,7 @@ namespace mvcdemo.Controllers
 {
     public class BankController : Controller
     {
-        // GET: Bank
+        [HttpGet]
         public ActionResult Interest()
         {
             var model = new InterestViewModel();
