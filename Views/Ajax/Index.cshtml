@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ajax Demo</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function getHolder() {
+            // get(url,data,successcallback)
+            $.get("/Ajax/GetHolder/" + $("#acno").val(), {}, showHolder);
+        }
+
+        // result is value returned from server
+        function showHolder(result) {
+            $("#holder").text(result);
+        }
+
+    </script>
+</head>
+<body>
+    <h2>Ajax Demo With jQuery</h2>
+    Account No : <input type="text" id="acno" /> <span id="holder"></span>
+    <p></p>
+    <button onclick="getHolder()">Get Holder</button>
+
+    <hr />
+
+    <h2>Ajax Demo with Ajax Link</h2>
+    @Ajax.ActionLink("Show Time", "Now", new AjaxOptions { UpdateTargetId = "now" })
+    <p></p>
+    <h1 id="now"></h1>
+
+
+    <h2>Account</h2>
+    <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#accounts" href="/Ajax/ListAccount">Show Accounts</a>
+    <p></p>
+    <div id="accounts"></div>
+
+
+
+</body>
+</html>
