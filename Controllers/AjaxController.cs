@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,7 +13,10 @@ namespace mvcdemo.Controllers
             {
                     { "1001", "Bill Gates"},
                     { "1002", "Larry Ellison"},
-                    { "1003", "Larry Page"}
+                    { "1003", "Larry Page"},
+                    { "1004", "Jeff Bezos"},
+                    { "1005", "Mark Zukerberg"},
+                    { "1006", "Elon Musk"}
             };
 
         // GET: Ajax
@@ -36,16 +40,23 @@ namespace mvcdemo.Controllers
 
         }
 
-        public string ListAccount()
+        public  ActionResult ListAccounts()
         {
-            string  output = "<table><tr><th>Acno </th><th>Holder Name</th></tr>";
+            Thread.Sleep(5000);  // 5 sec
 
-            foreach (string key in accounts.Keys)
-                output += "<tr><td>" + key + "</td><td>" + accounts[key] + "</td></tr>";
+            return PartialView(accounts); 
+             
+        }
 
-            output += "</table>";
+        public ActionResult SearchAccounts(string pattern)
+        {
+            var result = new Dictionary<string, string>();
 
-            return output;
+            foreach (var key in accounts.Keys)
+                if (accounts[key].Contains(pattern))
+                    result.Add(key, accounts[key]);
+
+            return PartialView("ListAccounts", result);
 
         }
     }

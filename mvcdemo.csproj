@@ -209,6 +209,7 @@
     <Content Include="Views\Bank\Interest.cshtml" />
     <Content Include="Views\Shared\_DemoLayout.cshtml" />
     <Content Include="Views\Ajax\Index.cshtml" />
+    <Content Include="Views\Ajax\ListAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

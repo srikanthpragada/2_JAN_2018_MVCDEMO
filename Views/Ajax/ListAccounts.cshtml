@@ -1,0 +1,17 @@
+﻿@model Dictionary<string,string>
+
+<table border="1" width="100%">
+    <tr>
+        <th>Account No.</th>
+        <th>Holder Name</th>
+    </tr>
+
+    @foreach(var key in Model.Keys)
+    {
+        <tr>
+             <td>@key</td>
+             <td>@Model[@key]</td>
+        </tr>
+    }
+
+</table>

@@ -22,6 +22,9 @@
             $("#holder").text(result);
         }
 
+        function beforeLoad() {
+            $('#accounts').text('');
+        }
     </script>
 </head>
 <body>
@@ -32,17 +35,27 @@
 
     <hr />
 
-    <h2>Ajax Demo with Ajax Link</h2>
+    <h2>Ajax Demo with AjaxLink</h2>
     @Ajax.ActionLink("Show Time", "Now", new AjaxOptions { UpdateTargetId = "now" })
     <p></p>
     <h1 id="now"></h1>
 
 
-    <h2>Account</h2>
-    <a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#accounts" href="/Ajax/ListAccount">Show Accounts</a>
+    <h2>AjaxLink with PartialView</h2>
+    @Ajax.ActionLink("List Account", "ListAccounts",
+         new AjaxOptions { UpdateTargetId = "accounts", OnBegin="beforeLoad()", LoadingElementId ="loadImage" })
+    <img id="loadImage" src="~/Content/ajax-loader.gif"  style="display:none" />
     <p></p>
     <div id="accounts"></div>
 
+    <h2>AjaxForm + PartialView Demo</h2>
+    
+    @using (Ajax.BeginForm("SearchAccounts", new AjaxOptions { UpdateTargetId = "searchResults" }))
+    {
+        <span>Name</span> <input type="text" name="pattern"/> <input type="submit" value="Search"/>
+        <p></p>
+        <div id="searchResults"></div>
+    }
 
 
 </body>
