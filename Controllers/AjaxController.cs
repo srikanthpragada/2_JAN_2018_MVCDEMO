@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace mvcdemo.Controllers
 {
+    [Authorize]
     public class AjaxController : Controller
     {
         Dictionary<string, string> accounts = new Dictionary<string, string>()

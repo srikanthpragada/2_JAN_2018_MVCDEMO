@@ -9,7 +9,7 @@ namespace mvcdemo.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: Product
+        [Authorize]
         public ActionResult Index()
         {
             Product p = new Product { Name = "iPhone X", Price = 80000 };
