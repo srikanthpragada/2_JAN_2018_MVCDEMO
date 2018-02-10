@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Send</title>
+</head>
+<body>
+    <h2>Send Mail</h2>
+    @using (Html.BeginForm())
+    {
+        <div>Subject </div>
+        <input type="text" name="subject" />
+        <p />
+        <div>Body </div>
+        <textarea name="body" rows="5"></textarea>
+        <p/>
+        <input type="submit" value="Send" />
+        <p/>
+        <h4>@ViewBag.Message</h4>
+    } 
+</body>
+</html>
