@@ -1,0 +1,51 @@
+﻿@model IEnumerable<mvcdemo.Models.Category>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <h1>List Of Categories</h1>
+
+    <table border="1" cellpadding="5pt">
+        <tr>
+            <th>
+                Code
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Code
+                </td>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Code })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <p>
+        @Html.ActionLink("Add New Category", "Add")
+    </p>
+
+    <h3>@TempData["Message"]</h3>
+</body>
+</html>
