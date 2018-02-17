@@ -163,8 +163,10 @@
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CacheController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\GreetController.cs" />
     <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CategoryAPIController.cs" />
     <Compile Include="Controllers\LinqCatController.cs" />
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
