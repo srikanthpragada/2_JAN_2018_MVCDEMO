@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Category API Client</title>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        function getCategory() {
+            $("#message").text("")
+            $.ajax("api/CategoryAPI/" + $("#catcode").val(),
+                {
+                    method: 'GET',
+                    success: showCategory,
+                    error: codeNotFound,
+                    accepts: "application/json"
+                }
+            );
+        }
+
+        function deleteCategory() {
+            $("#message").text("")
+            $.ajax("api/CategoryAPI/" + $("#catcode").val(),
+                {
+                    method: 'DELETE',
+                    success: deletedCategory,
+                    error: showError,
+                }
+            );
+        }
+
+        function deletedCategory() {
+            $("#message").text("Deleted category successfully!")
+        }
+
+        function addCategory() {
+            $.ajax(
+                {
+                    url: "api/CategoryAPI",
+                    method: 'POST',
+                    success: addedCategory,
+                    error: showError,
+                    data:
+                    {
+                        'Code': $("#catcode").val(),
+                        'Description': $("#catdesc").val()
+                    }
+                }
+            );
+        }
+
+        function updateCategory() {
+            $.ajax(
+                {
+                    url: "api/CategoryAPI/" + $("#catcode").val(),
+                    method: 'PUT',
+                    success: updatedCategory,
+                    error: showError,
+                    data:
+                    {
+                        'Code': $("#catcode").val(),
+                        'Description': $("#catdesc").val()
+                    }
+                }
+            );
+        }
+
+        function updatedCategory() {
+            $("#message").text("Successfully updated category!")
+        }
+
+        function addedCategory() {
+            $("#message").text("Successfully added category!")
+        }
+
+        function showError(xhr, status, message) {
+            if (xhr.status == 404)
+                $("#message").text("Category Code Not Found!")
+            else
+                $("#message").text("Sorry! Due to an error couldn't complete task!")
+
+            console.log(status)
+            console.log(message)
+            console.log(xhr)
+        }
+
+        function codeNotFound() {
+            $("#catdesc").val("");
+            $("#message").text("Category Code Not Found!")
+        }
+
+        function showCategory(category) {
+            $("#catdesc").val(category.Description);
+        }
+
+        function getAllCategories() {
+            $("#message").text("")
+            $.ajax("api/CategoryAPI",
+                {
+                    method: 'GET',
+                    success: showAllCategories,
+                    accepts: "application/json"
+                }
+            );
+        }
+
+        function showAllCategories(allcategories) {
+            output = "";
+
+            $.each(allcategories,
+                function (idx, cat) {
+                    output += "<tr><td>" + cat.Code + "</td><td>" + cat.Description + "</td></tr>";
+                }
+            );
+
+            $("#cats").html(output);  // put data in table body 
+            $("#categories").css("visibility", "visible");   // Make table visible 
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Category API Client</h1>
+    Category Code <br />
+    <input type="text" id="catcode" />
+    <button onclick="getCategory()">Get</button>
+    <span id="message" style="color:red"></span>
+    <p />
+    Category Description <br />
+    <input type="text" id="catdesc" />
+    <p />
+    <button onclick="addCategory()">Add</button>
+    <button onclick="deleteCategory()">Delete</button>
+    <button onclick="updateCategory()">Update</button>
+    <button onclick="getAllCategories()">Show All</button>
+
+    <div id="categories" style="visibility:hidden">
+        <table style="width:100%" border="1">
+            <thead>
+                <tr>
+                    <th>Category Code </th>
+                    <th>Category Description</th>
+                </tr>
+            </thead>
+            <tbody id="cats"></tbody>
+        </table>
+
+    </div>
+
+
+
+</body>
+</html>
